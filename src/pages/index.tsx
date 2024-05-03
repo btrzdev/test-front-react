@@ -1,117 +1,187 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import { FaDoorOpen } from "react-icons/fa6";
+import { useEffect, useState } from "react";
+import { DATA } from "./data";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [inputValues, setInputValues] = useState({
+    input1: "label",
+    input2: "label",
+    input3: "label",
+    input4: "label",
+  });
+
+  const [foundedItem, setFoundedItem] = useState("");
+  const [searchTextField, setSearchTextField] = useState("");
+
+  const handleInputFill = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    if (evt.target.value.length > 3) {
+      setInputValues({
+        ...inputValues,
+        [evt.target.id]: "input",
+      });
+    }
+    if (evt.target.value.length < 3) {
+      setInputValues({
+        ...inputValues,
+        [evt.target.id]: "label",
+      });
+    }
+  };
+
+  const handleSearch = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    handleInputFill(evt);
+
+    const inputValue = evt.target.value;
+    const foundItem = DATA.find((item) => item.value === inputValue);
+    setSearchTextField("Localizando valores...");
+
+    if (foundItem) {
+      setSearchTextField("");
+      setFoundedItem(inputValue);
+    }
+  };
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+      <div className="flex items-center">
+        <h2 className="text-[#2542E0] font-semibold text-[20px]">Grupo Uni</h2>
+        <div className="absolute flex justify-between items-center gap-2 right-10 text-[#2542E0]">
+          <FaDoorOpen size={30} /> <span>Sair</span>
         </div>
       </div>
+      <div className="w-full pt-[42px] absolute top-[300px] h-[256px] bg-gradient-to-b px-[50px] from-[#2542E0] via-[#443BC6] to-[#6F30A2] flex-col items-center justify-center">
+        <h3 className="text-[20px] font-semibold text-white text-center mb-[35px]">
+          Adicionar novo saldo de Bonificação
+        </h3>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <div className="h-[419px] rounded-[16px] w-full p-[22px] bg-white border border-[#BBBBBB]">
+          <div className="flex gap-[16px]">
+            <div className="flex-col">
+              <div className="label w-[420px] h-[74px]">
+                <p>Informe o código do produto ou SKU</p>
+              </div>
+              <div className="label w-[420px] h-[74px]">
+                <p>Quanto será consumido do saldo ?</p>
+              </div>
+              <div className="label w-[420px] h-[74px]">
+                <p>
+                  Saldo dia Atual 50 Unidades, quanto quer consumir para ser
+                  notificado ?
+                </p>
+              </div>
+              <div className="label w-[420px] h-[74px]">
+                <p>De qual nota será consumido o Saldo ?</p>
+              </div>
+            </div>
+            <div className="flex-col flex-nowrap">
+              <div className="flex items-center gap-[12px]">
+                <input
+                  className={`${inputValues.input1} w-[420px] h-[74px]`}
+                  type="text"
+                  onChange={(evt) => handleInputFill(evt)}
+                  id="input1"
+                />
+                <img
+                  src="check-icon.png"
+                  alt="check icon"
+                  className={`${
+                    inputValues.input1 === "label" ? "hidden" : "flex"
+                  } w-[29px] h-[29px]`}
+                />
+              </div>
+              <div className="flex items-center gap-[12px]">
+                <input
+                  className={`${inputValues.input2} w-[420px] h-[74px]`}
+                  type="text"
+                  onChange={(evt) => handleInputFill(evt)}
+                  id="input2"
+                />
+                <img
+                  src="check-icon.png"
+                  alt="check icon"
+                  className={`${
+                    inputValues.input2 === "label" ? "hidden" : "flex"
+                  } w-[29px] h-[29px]`}
+                />
+              </div>
+              <div className="flex items-center gap-[12px]">
+                <input
+                  className={`${inputValues.input3} w-[420px] h-[74px]`}
+                  type="text"
+                  onChange={(evt) => handleInputFill(evt)}
+                  id="input3"
+                />
+                <img
+                  src="check-icon.png"
+                  alt="check icon"
+                  className={`${
+                    inputValues.input3 === "label" ? "hidden" : "flex"
+                  } w-[29px] h-[29px]`}
+                />
+              </div>
+              <div className="flex items-center gap-[12px]">
+                <input
+                  className={`${inputValues.input4} w-[420px] h-[74px]`}
+                  type="text"
+                  onChange={(evt) => handleSearch(evt)}
+                  id="input4"
+                />
+                <img
+                  src="check-icon.png"
+                  alt="check icon"
+                  className={`${
+                    inputValues.input4 === "label" ? "hidden" : "flex"
+                  } w-[29px] h-[29px]`}
+                />
+              </div>
+            </div>
+            <div className="flex-col flex-nowrap">
+              <div className="border border-[#BBBBBB] w-[295px] h-[300px] rounded-2xl">
+                <h3>{searchTextField}</h3>
+                <table className="text-[#BBBBBB] w-full mt-[30px]">
+                  <thead className="font-semibold border-b-2">
+                    <tr className="">
+                      <th
+                        scope="col"
+                        className="text-left text-[16px] flex-1 px-4"
+                      >
+                        Nota
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-right text-[16px] flex-1 px-4"
+                      >
+                        Saldo Atual
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-[##D9D9D93D] font-semibold">
+                    {DATA.map((item) => (
+                      <tr
+                        className={
+                          item.value === foundedItem
+                            ? "bg-[#D9D9D93D] font-bold"
+                            : ""
+                        }
+                        key={item.id}
+                      >
+                        <td className="py-[10px] px-4">{item.value}</td>
+                        <td className="text-right px-4">{item.balance}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
