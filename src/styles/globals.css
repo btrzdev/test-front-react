@@ -9,7 +9,11 @@
 }
 
 .input {
-  @apply box-border w-[420px] h-[74px] mb-[16px] border shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-[10px] border-solid border-[rgba(138,204,26,0.25)] left-[519px] top-[296px];
+  @apply box-border text-center w-[420px] h-[74px] mb-[16px] border shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-[10px] border-solid border-[rgba(138,204,26,0.25)] left-[519px] top-[296px];
 
   background: rgba(138, 204, 26, 0.25);
+}
+
+input:focus {
+  outline: none;
 }

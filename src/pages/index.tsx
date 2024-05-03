@@ -44,6 +44,11 @@ export default function Home() {
       setSearchTextField("");
       setFoundedItem(inputValue);
     }
+
+    if (evt.target.value === "") {
+      setSearchTextField("");
+      setFoundedItem("");
+    }
   };
 
   return (
@@ -61,22 +66,22 @@ export default function Home() {
           Adicionar novo saldo de Bonificação
         </h3>
 
-        <div className="h-[419px] rounded-[16px] w-full p-[22px] bg-white border border-[#BBBBBB]">
+        <div className="h-[419px] rounded-[16px]  flex justify-center p-[22px] bg-white border border-[#BBBBBB]">
           <div className="flex gap-[16px]">
             <div className="flex-col">
-              <div className="label w-[420px] h-[74px]">
+              <div className="label min-w-[300px] max-w-[420px] h-[74px]">
                 <p>Informe o código do produto ou SKU</p>
               </div>
-              <div className="label w-[420px] h-[74px]">
+              <div className="label max-w-[420px] h-[74px]">
                 <p>Quanto será consumido do saldo ?</p>
               </div>
-              <div className="label w-[420px] h-[74px]">
+              <div className="label max-w-[420px] h-[74px]">
                 <p>
                   Saldo dia Atual 50 Unidades, quanto quer consumir para ser
                   notificado ?
                 </p>
               </div>
-              <div className="label w-[420px] h-[74px]">
+              <div className="label max-w-[420px] h-[74px]">
                 <p>De qual nota será consumido o Saldo ?</p>
               </div>
             </div>
@@ -98,7 +103,7 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-[12px]">
                 <input
-                  className={`${inputValues.input2} w-[420px] h-[74px]`}
+                  className={`${inputValues.input2}  w-[420px] h-[74px]`}
                   type="text"
                   onChange={(evt) => handleInputFill(evt)}
                   id="input2"
@@ -143,8 +148,8 @@ export default function Home() {
               </div>
             </div>
             <div className="flex-col flex-nowrap">
-              <div className="border border-[#BBBBBB] w-[295px] h-[300px] rounded-2xl">
-                <h3>{searchTextField}</h3>
+              <div className="border border-[#BBBBBB] w-[295px] h-[344px] rounded-2xl">
+                <h3 className="px-[10%] py-[10%]">{searchTextField}</h3>
                 <table className="text-[#BBBBBB] w-full mt-[30px]">
                   <thead className="font-semibold border-b-2">
                     <tr className="">
